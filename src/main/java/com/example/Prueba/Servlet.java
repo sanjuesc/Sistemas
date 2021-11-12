@@ -30,8 +30,13 @@ String password = "password";
                 Connection con = DriverManager.getConnection(url,username,password);
                 PreparedStatement st=con.prepareStatement("select now()");
                 ResultSet rs = st.executeQuery();
-                Date fecha = rs.getDate("now()");
-                writer.println("<h1>"+fecha+"</h1>");
+                if (rs.next()){
+                    Date fecha = rs.getDate("now()");
+                    writer.println("<h1>"+fecha+"</h1>");
+                }else{
+                    writer.println("La conexion y tal bien pero no habia nada en el rs bro");
+                }
+
             } catch (ClassNotFoundException | SQLException e) {
                 e.printStackTrace();
                 writer.println(e.getMessage());
