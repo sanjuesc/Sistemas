@@ -30,6 +30,7 @@ String password = "password";
                 Connection con = DriverManager.getConnection(url,username,password);
                 PreparedStatement st=con.prepareStatement("select now()");
                 ResultSet rs = st.executeQuery();
+                writer.println("hasta aqui tamos, ahora va el if");
                 if (rs.next()){
                     Date fecha = rs.getDate("now()");
                     writer.println("<h1>"+fecha+"</h1>");
