@@ -8,7 +8,7 @@ import java.sql.*;
 
 
 public class Servlet extends HttpServlet {
-String url = "jdbc:mysql://db:3306/example_db?connectTimeout=0&amp;socketTimeout=0&amp;autoReconnect=true";
+String url = "jdbc:mysql://db:3306/example_db";
 String username = "user";
 String password = "password";
 
