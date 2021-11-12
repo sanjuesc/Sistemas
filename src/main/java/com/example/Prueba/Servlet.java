@@ -34,7 +34,7 @@ String password = "password";
                 writer.println("<h1>"+fecha+"</h1>");
             } catch (ClassNotFoundException | SQLException e) {
                 e.printStackTrace();
-                writer.println("<h1>aaaaaaaaaaaa</h1>");
+                writer.println(e.getMessage());
             }
 
             writer.println("<h1>This is a simple java servlet.</h1>");
