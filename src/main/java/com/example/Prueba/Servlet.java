@@ -9,7 +9,7 @@ import java.sql.*;
 
 public class Servlet extends HttpServlet {
 String url = "jdbc:mysql://db:3306/example_db";
-String username = "user";
+String username = "root";
 String password = "password";
 
 
