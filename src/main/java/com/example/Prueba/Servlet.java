@@ -30,7 +30,7 @@ String password = "password";
                 Connection con = DriverManager.getConnection(url,username,password);
                 PreparedStatement st=con.prepareStatement("select now()");
                 ResultSet rs = st.executeQuery();
-                Date fecha = rs.getDate(0);
+                Date fecha = rs.getDate("now()");
                 writer.println("<h1>"+fecha+"</h1>");
             } catch (ClassNotFoundException | SQLException e) {
                 e.printStackTrace();
