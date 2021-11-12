@@ -28,7 +28,7 @@ String password = "password";
 
                 Class.forName("com.mysql.jdbc.Driver");
                 Connection con = DriverManager.getConnection(url,username,password);
-                PreparedStatement st=con.prepareStatement("select date() from dual");
+                PreparedStatement st=con.prepareStatement("select now()");
                 ResultSet rs = st.executeQuery();
                 Date fecha = rs.getDate(0);
                 writer.println("<h1>"+fecha+"</h1>");
