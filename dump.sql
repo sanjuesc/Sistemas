@@ -18,7 +18,7 @@
 --
 -- Table structure for table `user`
 --
-DROP DATABASE IS EXISTS SISTEMAS;
+drop database if exists sistemas;
 CREATE DATABASE SISTEMAS;
 USE SISTEMAS;
 DROP TABLE IF EXISTS `user`;
