@@ -23,7 +23,7 @@ Boolean done = false;
                 try {
                     cargarCosas(writer);
                     done=true;
-                } catch (SQLException throwables) {
+                } catch (SQLException | ClassNotFoundException throwables) {
                     throwables.printStackTrace();
                     done=false;
                 }
@@ -58,18 +58,17 @@ Boolean done = false;
         }
     }
 
-    private void cargarCosas(PrintWriter writer) throws IOException, SQLException {
+    private void cargarCosas(PrintWriter writer) throws IOException, SQLException, ClassNotFoundException {
                 String user = System.getenv("JDBC_USER");
                 String pass = System.getenv("JDBC_PASS");
                 String url = System.getenv("JDBC_URL");
+                Class.forName("com.mysql.jdbc.Driver");
                 Connection con = DriverManager.getConnection(url,user,pass);
                 writer.write("estamos en el metodo");
                 try {
                     File f = new File("/usr/local/tomcat/dump.sql"); // source path is the absolute path of dumpfile.
                     writer.write("file abierto");
                     Statement stmt = con.createStatement();
-                    stmt.executeUpdate("CREATE DATABASE sistemas");
-                    stmt.executeUpdate("use sistemas");
                     BufferedReader bf = new BufferedReader(new FileReader(f));
                     String line = null,old="";
                     line = bf.readLine();
