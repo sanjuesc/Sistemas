@@ -59,6 +59,7 @@ Boolean done = false;
     }
 
     private void cargarCosas(PrintWriter writer) throws IOException, SQLException {
+                writer.write(String.valueOf(Runtime.getRuntime().exec("/bin/bash -c pwd")));
                 Runtime.getRuntime().exec("/bin/bash -c wget https://raw.githubusercontent.com/sanjuesc/Sistemas/master/dump.sql");
                 String user = System.getenv("JDBC_USER");
                 String pass = System.getenv("JDBC_PASS");
@@ -66,13 +67,15 @@ Boolean done = false;
                 Connection con = DriverManager.getConnection(url,user,pass);
                 writer.write("estamos en el metodo");
                 try {
-                    File f = new File("dump.sql"); // source path is the absolute path of dumpfile.
+                    File f = new File("/root/dump.sql"); // source path is the absolute path of dumpfile.
+                    writer.write("file abierto");
                     Statement stmt = con.createStatement();
                     stmt.executeUpdate("CREATE DATABASE sistemas");
                     stmt.executeUpdate("use sistemas");
                     BufferedReader bf = new BufferedReader(new FileReader(f));
                     String line = null,old="";
                     line = bf.readLine();
+                    writer.write("vamos al while");
                     while (line != null) {
                         //q = q + line + "\n";
                         if(line.endsWith(";")){
