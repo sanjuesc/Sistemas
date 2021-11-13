@@ -62,7 +62,7 @@ String url = System.getenv("JDBC_URL");
                     File f = new File("dump.sql"); // source path is the absolute path of dumpfile.
                     Statement stmt = con.createStatement();
                     stmt.executeUpdate("CREATE DATABASE sistemas");
-                    stmt.executeUpdate("user sistemas");
+                    stmt.executeUpdate("use sistemas");
                     BufferedReader bf = new BufferedReader(new FileReader(f));
                     String line = null,old="";
                     line = bf.readLine();
