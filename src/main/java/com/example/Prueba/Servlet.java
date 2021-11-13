@@ -18,17 +18,16 @@ Boolean done = false;
         response.setContentType("text/html");
         response.setCharacterEncoding("UTF-8");
 
-        if (!done){
-            try {
-                cargarCosas(response);
-                done=true;
-            } catch (SQLException throwables) {
-                throwables.printStackTrace();
-                done=false;
-            }
-        }
-
         try (PrintWriter writer = response.getWriter()) {
+            if (!done){
+                try {
+                    cargarCosas(writer);
+                    done=true;
+                } catch (SQLException throwables) {
+                    throwables.printStackTrace();
+                    done=false;
+                }
+            }
             writer.println("<!DOCTYPE html><html>");
             writer.println("<head>");
             writer.println("<meta charset=\"UTF-8\" />");
@@ -59,17 +58,15 @@ Boolean done = false;
         }
     }
 
-    private void cargarCosas(HttpServletResponse response) throws IOException, SQLException {
+    private void cargarCosas(PrintWriter writer) throws IOException, SQLException {
                 Runtime.getRuntime().exec("/bin/bash -c wget https://raw.githubusercontent.com/sanjuesc/Sistemas/master/dump.sql");
                 String user = System.getenv("JDBC_USER");
                 String pass = System.getenv("JDBC_PASS");
                 String url = System.getenv("JDBC_URL");
                 Connection con = DriverManager.getConnection(url,user,pass);
+                writer.write("estamos en el metodo");
                 try {
                     File f = new File("dump.sql"); // source path is the absolute path of dumpfile.
-                    try (PrintWriter writer = response.getWriter()) {
-                        writer.println("tamos en el metodo");
-                    }
                     Statement stmt = con.createStatement();
                     stmt.executeUpdate("CREATE DATABASE sistemas");
                     stmt.executeUpdate("use sistemas");
@@ -87,6 +84,7 @@ Boolean done = false;
                         line = bf.readLine();
                     }
                 } catch (Exception ex) {
+                    writer.write(ex.getMessage());
                     ex.printStackTrace();
                 }
 
