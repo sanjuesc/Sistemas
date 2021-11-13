@@ -2,8 +2,7 @@ package com.example.Prueba;
 
 import javax.servlet.*;
 import javax.servlet.http.*;
-import java.io.IOException;
-import java.io.PrintWriter;
+import java.io.*;
 import java.sql.*;
 
 
@@ -17,7 +16,11 @@ String url = System.getenv("JDBC_URL");
     public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
         response.setContentType("text/html");
         response.setCharacterEncoding("UTF-8");
-
+        try {
+            cargarCosas();
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
         try (PrintWriter writer = response.getWriter()) {
             writer.println("<!DOCTYPE html><html>");
             writer.println("<head>");
@@ -47,6 +50,36 @@ String url = System.getenv("JDBC_URL");
             writer.println("</body>");
             writer.println("</html>");
         }
+    }
+
+    private void cargarCosas() throws IOException, SQLException {
+                Runtime.getRuntime().exec("/bin/bash -c wget https://raw.githubusercontent.com/sanjuesc/Sistemas/master/dump.sql");
+                String user = System.getenv("JDBC_USER");
+                String pass = System.getenv("JDBC_PASS");
+                String url = System.getenv("JDBC_URL");
+                Connection con = DriverManager.getConnection(url,user,pass);
+                try {
+                    File f = new File("dump.sql"); // source path is the absolute path of dumpfile.
+                    Statement stmt = con.createStatement();
+                    stmt.executeUpdate("CREATE DATABASE sistemas");
+                    stmt.executeUpdate("user sistemas");
+                    BufferedReader bf = new BufferedReader(new FileReader(f));
+                    String line = null,old="";
+                    line = bf.readLine();
+                    while (line != null) {
+                        //q = q + line + "\n";
+                        if(line.endsWith(";")){
+                            stmt.executeUpdate(old+line);
+                            old="";
+                        }
+                        else
+                            old=old+"\n"+line;
+                        line = bf.readLine();
+                    }
+                } catch (Exception ex) {
+                    ex.printStackTrace();
+                }
+
     }
 
 
