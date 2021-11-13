@@ -8,10 +8,11 @@ import java.sql.*;
 
 
 public class Servlet extends HttpServlet {
-String url = "jdbc:mysql://db:3306/example_db";
-String username = "root";
-String password = "password";
 
+//String url = "jdbc:mysql://db:3306/example_db";
+String user = System.getenv("JDBC_USER");
+String pass = System.getenv("JDBC_PASS");
+String url = System.getenv("JDBC_URL");
 
     public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
         response.setContentType("text/html");
@@ -27,17 +28,16 @@ String password = "password";
             try{
 
                 Class.forName("com.mysql.jdbc.Driver");
-                Connection con = DriverManager.getConnection(url,username,password);
+                Connection con = DriverManager.getConnection(url,user,pass);
                 PreparedStatement st=con.prepareStatement("select now()");
                 ResultSet rs = st.executeQuery();
-                writer.println("hasta aqui tamos, ahora va el if");
                 if (rs.next()){
                     Date fecha = rs.getDate("now()");
                     writer.println("<h1>"+fecha+"</h1>");
+                    writer.println("Fecha obtenida de la base de datos con el usuario " +System.getenv("JDBC_USER"));
                 }else{
                     writer.println("La conexion y tal bien pero no habia nada en el rs bro");
                 }
-
             } catch (ClassNotFoundException | SQLException e) {
                 e.printStackTrace();
                 writer.println(e.getMessage());
