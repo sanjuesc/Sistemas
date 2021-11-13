@@ -74,7 +74,7 @@ Boolean done = false;
                     line = bf.readLine();
                     writer.write("vamos al while<br>");
                     while (line != null) {
-                        if(line.endsWith(";")){
+                        if(line.endsWith(";") && !line.startsWith("--")){
                             writer.write(old+line+"<br>");
                             stmt.executeUpdate(old+line);
                             old="";
