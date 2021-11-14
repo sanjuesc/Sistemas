@@ -14,10 +14,37 @@ String pass = System.getenv("JDBC_PASS");
 String url = System.getenv("JDBC_URL");
 Boolean done = false;
 
-    public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
+    public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
+        HttpSession session = request.getSession(false);
+        if (session == null) { //si no tiene sesion comprobamos que tenga los parametros
+            if(request.getParameter("uname") == null || request.getParameter("psw")==null ) { //si no tiene los parametros a tomar por culo
+                request.getSession().setAttribute("pls", "si");
+                request.getRequestDispatcher("index.jsp").forward(request, response);//si no tiene sesion le devolvemos
+            }else{ //si tiene parametros miramos a ver si coinciden
+                String usuario = request.getParameter("uname");
+                String contra = request.getParameter("psw");
+                try{
+                    Class.forName("com.mysql.jdbc.Driver");
+                    Connection con = DriverManager.getConnection(url,user,pass);
+                    PreparedStatement st=con.prepareStatement("select count(*) from user where name=? and pass = ?");
+                    st.setString(1, usuario);
+                    st.setString(2, contra);
+                    ResultSet rs = st.executeQuery();
+                    if(rs.next()){
+                        session = request.getSession();
+                    }else{
+                        request.getSession().setAttribute("incorrecto","si");
+                        request.getRequestDispatcher("index.jsp").forward(request, response);
+                    }
+                } catch (ClassNotFoundException e) {
+                    e.printStackTrace();
+                } catch (SQLException throwables) {
+                    throwables.printStackTrace();
+                }
+            }
+        }
         response.setContentType("text/html");
         response.setCharacterEncoding("UTF-8");
-
         try (PrintWriter writer = response.getWriter()) {
             if (!done){
                 try {
@@ -94,7 +121,7 @@ Boolean done = false;
     }
 
 
-    public void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
+    public void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
         doGet(request, response);
     }
 }

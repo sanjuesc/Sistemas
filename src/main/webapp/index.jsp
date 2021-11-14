@@ -1,4 +1,4 @@
-<%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
+<%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" session="false" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -48,7 +48,6 @@
 
         /* Extra styles for the cancel button */
         .cancelbtn {
-            float: right
             width: auto;
             padding: 10px 18px;
             background-color: #f44336;
@@ -144,8 +143,16 @@
         <td valign="top">
 
             <h2>Bienvenido a mi aplicación</h2><br>
+            <%
+                if (request.getSession().getAttribute("pls") =="si") {
+                    out.println("Por favor <b style='color:red;'>inicia sesión</b> para continuar<br>");
+                }
+                else{
+                    out.println("Por favor inicia sesión para continuar<br>");
+                    }
+           %>
 
-            Por favor inicia sesión para continuar<br>
+
 
             <button onclick="document.getElementById('id01').style.display='block'" style="width:auto;">Iniciar sesión</button>
             <div id="id01" class="modal">
