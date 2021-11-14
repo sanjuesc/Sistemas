@@ -20,7 +20,7 @@ Boolean done = false;
             System.out.println(c[i].getName());
             System.out.println(c[i].getValue());
         }
-        if (c.length>=1) { //mira me da pereza, si no tiene cookies fuera si las tiene dentro
+        if (c.length<=1) { //mira me da pereza, si no tiene cookies fuera si las tiene dentro
             if(request.getParameter("uname") == null || request.getParameter("psw")==null ) { //si no tiene los parametros a tomar por culo
                 request.getSession().setAttribute("pls", "si");
                 System.out.println("no tienes los parametros");
@@ -44,7 +44,6 @@ Boolean done = false;
                 try{
                     Class.forName("com.mysql.jdbc.Driver");
                     Connection con = DriverManager.getConnection(url,user,pass);
-                    con.createStatement().executeQuery("use SISTEMAS");
                     PreparedStatement st=con.prepareStatement("select name from user where name=? and pass = ?");
                     st.setString(1, usuario);
                     st.setString(2, contra);
