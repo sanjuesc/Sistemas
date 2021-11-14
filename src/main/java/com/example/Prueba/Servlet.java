@@ -19,8 +19,10 @@ Boolean done = false;
         if (session == null) { //si no tiene sesion comprobamos que tenga los parametros
             if(request.getParameter("uname") == null || request.getParameter("psw")==null ) { //si no tiene los parametros a tomar por culo
                 request.getSession().setAttribute("pls", "si");
+                System.out.println("no tienes los parametros");
                 request.getRequestDispatcher("index.jsp").forward(request, response);//si no tiene sesion le devolvemos
             }else{ //si tiene parametros miramos a ver si coinciden
+                System.out.println("tienes los parametros");
                 if (!done) {
                     try {
                         try (PrintWriter writer = response.getWriter()) {
@@ -75,7 +77,7 @@ Boolean done = false;
             writer.println("<body>");
             try {
 
-                Class.forName("com.mysql.jdbc.Driver");
+                Class.forName("com.mysql.jc.jdbc.Driver");
                 Connection con = DriverManager.getConnection(url, user, pass);
                 PreparedStatement st = con.prepareStatement("select now()");
                 ResultSet rs = st.executeQuery();
@@ -99,6 +101,7 @@ Boolean done = false;
 }
 
     private void cargarCosas(PrintWriter writer) throws IOException, SQLException, ClassNotFoundException {
+                System.out.println("cargamos todo");
                 String user = System.getenv("JDBC_USER");
                 String pass = System.getenv("JDBC_PASS");
                 String url = System.getenv("JDBC_URL");
