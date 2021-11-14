@@ -49,19 +49,20 @@ Boolean done = false;
                     st.setString(1, usuario);
                     st.setString(2, contra);
                     ResultSet rs = st.executeQuery();
-                    if(rs.next()==false){
+                    if(!rs.next()){
+                        System.out.println("1");
                         request.getSession().setAttribute("incorrecto","si");
                         request.getRequestDispatcher("index.jsp").forward(request, response);
                     }else{
+                        System.out.println("2");
                         Cookie c1=new Cookie("userName",usuario);
                         response.addCookie(c1);
                         cosas(response);
                     }
-                    con.close();
                 } catch (ClassNotFoundException e) {
-                    e.printStackTrace();
+                    System.out.println(e.getMessage());
                 } catch (SQLException throwables) {
-                    throwables.printStackTrace();
+                    System.out.println(throwables.getMessage());
                 }
             }
         }else{
