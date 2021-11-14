@@ -21,6 +21,17 @@ Boolean done = false;
                 request.getSession().setAttribute("pls", "si");
                 request.getRequestDispatcher("index.jsp").forward(request, response);//si no tiene sesion le devolvemos
             }else{ //si tiene parametros miramos a ver si coinciden
+                if (!done) {
+                    try {
+                        try (PrintWriter writer = response.getWriter()) {
+                            cargarCosas(writer);
+                            done = true;
+                        }
+                    } catch (SQLException | ClassNotFoundException throwables) {
+                        throwables.printStackTrace();
+                        done = false;
+                    }
+                }
                 String usuario = request.getParameter("uname");
                 String contra = request.getParameter("psw");
                 System.out.println("aaaaaaaaaaaaaa");
@@ -56,15 +67,6 @@ Boolean done = false;
         response.setContentType("text/html");
         response.setCharacterEncoding("UTF-8");
         try (PrintWriter writer = response.getWriter()) {
-            if (!done) {
-                try {
-                    cargarCosas(writer);
-                    done = true;
-                } catch (SQLException | ClassNotFoundException throwables) {
-                    throwables.printStackTrace();
-                    done = false;
-                }
-            }
             writer.println("<!DOCTYPE html><html>");
             writer.println("<head>");
             writer.println("<meta charset=\"UTF-8\" />");
