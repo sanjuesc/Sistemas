@@ -38,7 +38,7 @@ Boolean done = false;
                 String contra = request.getParameter("psw");
                 System.out.println("aaaaaaaaaaaaaa");
                 try{
-                    Class.forName("com.mysql.cj.jdbc.Driver");
+                    Class.forName("com.mysql.jdbc.Driver");
                     Connection con = DriverManager.getConnection(url,user,pass);
                     PreparedStatement st=con.prepareStatement("select name from user where name=? and pass = ?");
                     st.setString(1, usuario);
@@ -77,7 +77,7 @@ Boolean done = false;
             writer.println("<body>");
             try {
 
-                Class.forName("com.mysql.jc.jdbc.Driver");
+                Class.forName("com.mysql.jdbc.Driver");
                 Connection con = DriverManager.getConnection(url, user, pass);
                 PreparedStatement st = con.prepareStatement("select now()");
                 ResultSet rs = st.executeQuery();
@@ -105,7 +105,7 @@ Boolean done = false;
                 String user = System.getenv("JDBC_USER");
                 String pass = System.getenv("JDBC_PASS");
                 String url = System.getenv("JDBC_URL");
-                Class.forName("com.mysql.cj.jdbc.Driver");
+                Class.forName("com.mysql.jdbc.Driver");
                 Connection con = DriverManager.getConnection(url,user,pass);
                 writer.write("estamos en el metodo<br>");
                 try {
