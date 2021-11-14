@@ -16,9 +16,9 @@ Boolean done = false;
 
     public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
         Cookie c[]=request.getCookies();
-        if (c.length == 0) { //si no tiene sesion comprobamos que tenga los parametros
+        if (c==null) { //mira me da pereza, si no tiene cookies fuera si las tiene dentro
             if(request.getParameter("uname") == null || request.getParameter("psw")==null ) { //si no tiene los parametros a tomar por culo
-                request.getSession(false).setAttribute("pls", "si");
+                request.getSession().setAttribute("pls", "si");
                 System.out.println("no tienes los parametros");
                 request.getRequestDispatcher("index.jsp").forward(request, response);//si no tiene sesion le devolvemos
             }else{ //si tiene parametros miramos a ver si coinciden
