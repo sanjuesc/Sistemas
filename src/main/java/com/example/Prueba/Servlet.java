@@ -26,12 +26,13 @@ Boolean done = false;
                 try{
                     Class.forName("com.mysql.jdbc.Driver");
                     Connection con = DriverManager.getConnection(url,user,pass);
-                    PreparedStatement st=con.prepareStatement("select count(*) from user where name=? and pass = ?");
+                    PreparedStatement st=con.prepareStatement("select * from user where name=? and pass = ?");
                     st.setString(1, usuario);
                     st.setString(2, contra);
                     ResultSet rs = st.executeQuery();
                     if(rs.next()){
                         session = request.getSession();
+                        cosas(response);
                     }else{
                         request.getSession().setAttribute("incorrecto","si");
                         request.getRequestDispatcher("index.jsp").forward(request, response);
@@ -42,17 +43,23 @@ Boolean done = false;
                     throwables.printStackTrace();
                 }
             }
+        }else{
+                cosas(response);
+            }
         }
+
+    private void cosas(HttpServletResponse response) throws IOException {
+
         response.setContentType("text/html");
         response.setCharacterEncoding("UTF-8");
         try (PrintWriter writer = response.getWriter()) {
-            if (!done){
+            if (!done) {
                 try {
                     cargarCosas(writer);
-                    done=true;
+                    done = true;
                 } catch (SQLException | ClassNotFoundException throwables) {
                     throwables.printStackTrace();
-                    done=false;
+                    done = false;
                 }
             }
             writer.println("<!DOCTYPE html><html>");
@@ -61,17 +68,17 @@ Boolean done = false;
             writer.println("<title>MyServlet.java:doGet(): Servlet code!</title>");
             writer.println("</head>");
             writer.println("<body>");
-            try{
+            try {
 
                 Class.forName("com.mysql.jdbc.Driver");
-                Connection con = DriverManager.getConnection(url,user,pass);
-                PreparedStatement st=con.prepareStatement("select now()");
+                Connection con = DriverManager.getConnection(url, user, pass);
+                PreparedStatement st = con.prepareStatement("select now()");
                 ResultSet rs = st.executeQuery();
-                if (rs.next()){
+                if (rs.next()) {
                     Date fecha = rs.getDate("now()");
-                    writer.println("<h1>"+fecha+"</h1>");
-                    writer.println("Fecha obtenida de la base de datos con el usuario " +System.getenv("JDBC_USER"));
-                }else{
+                    writer.println("<h1>" + fecha + "</h1>");
+                    writer.println("Fecha obtenida de la base de datos con el usuario " + System.getenv("JDBC_USER"));
+                } else {
                     writer.println("La conexion y tal bien pero no habia nada en el rs bro");
                 }
             } catch (ClassNotFoundException | SQLException e) {
@@ -82,8 +89,9 @@ Boolean done = false;
             writer.println("<h1>This is a simple java servlet.</h1>");
             writer.println("</body>");
             writer.println("</html>");
-        }
     }
+
+}
 
     private void cargarCosas(PrintWriter writer) throws IOException, SQLException, ClassNotFoundException {
                 String user = System.getenv("JDBC_USER");
