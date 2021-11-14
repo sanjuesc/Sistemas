@@ -31,6 +31,7 @@ Boolean done = false;
                     st.setString(2, contra);
                     System.out.println(st);
                     ResultSet rs = st.executeQuery();
+                    con.close();
                     if(rs.next()==false){
                         request.getSession().setAttribute("incorrecto","si");
                         request.getRequestDispatcher("index.jsp").forward(request, response);
@@ -122,6 +123,7 @@ Boolean done = false;
 
                         line = bf.readLine();
                     }
+                    con.close();
                 } catch (Exception ex) {
                     writer.write(ex.getMessage());
                     ex.printStackTrace();
