@@ -18,7 +18,7 @@ Boolean done = false;
         HttpSession session = request.getSession(false);
         if (session == null) { //si no tiene sesion comprobamos que tenga los parametros
             if(request.getParameter("uname") == null || request.getParameter("psw")==null ) { //si no tiene los parametros a tomar por culo
-                request.getSession().setAttribute("pls", "si");
+                request.getSession(false).setAttribute("pls", "si");
                 System.out.println("no tienes los parametros");
                 request.getRequestDispatcher("index.jsp").forward(request, response);//si no tiene sesion le devolvemos
             }else{ //si tiene parametros miramos a ver si coinciden
