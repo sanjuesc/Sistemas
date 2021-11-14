@@ -26,16 +26,16 @@ Boolean done = false;
                 try{
                     Class.forName("com.mysql.jdbc.Driver");
                     Connection con = DriverManager.getConnection(url,user,pass);
-                    PreparedStatement st=con.prepareStatement("select * from user where name=? and pass = ?");
+                    PreparedStatement st=con.prepareStatement("select name from user where name=? and pass = ?");
                     st.setString(1, usuario);
                     st.setString(2, contra);
                     ResultSet rs = st.executeQuery();
-                    if(rs.next()){
-                        session = request.getSession();
-                        cosas(response);
-                    }else{
+                    if(rs.next()==false){
                         request.getSession().setAttribute("incorrecto","si");
                         request.getRequestDispatcher("index.jsp").forward(request, response);
+                    }else{
+                        HttpSession sesionNueva = request.getSession();
+                        cosas(response);
                     }
                 } catch (ClassNotFoundException e) {
                     e.printStackTrace();
