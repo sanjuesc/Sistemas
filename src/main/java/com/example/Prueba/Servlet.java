@@ -16,7 +16,7 @@ Boolean done = false;
 
     public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
         Cookie c[]=request.getCookies();
-        if (c[1] != null) { //si no tiene sesion comprobamos que tenga los parametros
+        if (c.length > 0) { //si no tiene sesion comprobamos que tenga los parametros
             if(request.getParameter("uname") == null || request.getParameter("psw")==null ) { //si no tiene los parametros a tomar por culo
                 request.getSession(false).setAttribute("pls", "si");
                 System.out.println("no tienes los parametros");
@@ -51,6 +51,7 @@ Boolean done = false;
                         request.getRequestDispatcher("index.jsp").forward(request, response);
                     }else{
                         Cookie c1=new Cookie("userName",usuario);
+                        response.addCookie(c1);
                         cosas(response);
                     }
                 } catch (ClassNotFoundException e) {
