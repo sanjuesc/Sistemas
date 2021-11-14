@@ -65,7 +65,7 @@ Boolean done = false;
         }
 
     private void cosas(HttpServletResponse response) throws IOException {
-
+        System.out.println("hemos entrado a cosas");
         response.setContentType("text/html");
         response.setCharacterEncoding("UTF-8");
         try (PrintWriter writer = response.getWriter()) {
