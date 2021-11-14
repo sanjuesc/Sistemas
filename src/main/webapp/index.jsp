@@ -143,14 +143,8 @@
         <td valign="top">
 
             <h2>Bienvenido a mi aplicación</h2><br>
-            <%
-                if (request.getSession().getAttribute("pls") =="si") {
-                    out.println("Por favor <b style='color:red;'>inicia sesión</b> para continuar<br>");
-                }
-                else{
-                    out.println("Por favor inicia sesión para continuar<br>");
-                    }
-           %>
+            Por favor inicia sesión para continuar<br>
+
 
 
 

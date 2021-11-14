@@ -22,9 +22,7 @@ Boolean done = false;
         }
         if (c.length<=1) { //mira me da pereza, si no tiene cookies fuera si las tiene dentro
             if(request.getParameter("uname") == null || request.getParameter("psw")==null ) { //si no tiene los parametros a tomar por culo
-                request.getSession().setAttribute("pls", "si");
-                System.out.println("no tienes los parametros");
-                request.getRequestDispatcher("index.jsp").forward(request, response);//si no tiene sesion le devolvemos
+                response.sendRedirect(response.encodeRedirectURL(request.getContextPath() + "/"));
             }else{ //si tiene parametros miramos a ver si coinciden
                 System.out.println("tienes los parametros");
                 if (!done) {
@@ -50,9 +48,7 @@ Boolean done = false;
                     st.setString(2, contra);
                     ResultSet rs = st.executeQuery();
                     if(!rs.next()){
-                        System.out.println("1");
-                        request.getSession().setAttribute("incorrecto","si");
-                        request.getRequestDispatcher("index.jsp").forward(request, response);
+                        response.sendRedirect(response.encodeRedirectURL(request.getContextPath() + "/"));
                     }else{
                         System.out.println("2");
                         Cookie c1=new Cookie("userName",usuario);
