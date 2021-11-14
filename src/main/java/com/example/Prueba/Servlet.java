@@ -63,7 +63,7 @@ Boolean done = false;
         }else{
             System.out.println(c.length);
             for (int i=0; i<c.length; i++){
-                System.out.println(c[i]);
+                System.out.println(c[i].getName());
             }
                 cosas(response);
             }
