@@ -48,7 +48,6 @@ Boolean done = false;
                     st.setString(1, usuario);
                     st.setString(2, contra);
                     ResultSet rs = st.executeQuery();
-                    con.close();
                     if(rs.next()==false){
                         request.getSession().setAttribute("incorrecto","si");
                         request.getRequestDispatcher("index.jsp").forward(request, response);
@@ -57,6 +56,7 @@ Boolean done = false;
                         response.addCookie(c1);
                         cosas(response);
                     }
+                    con.close();
                 } catch (ClassNotFoundException e) {
                     e.printStackTrace();
                 } catch (SQLException throwables) {
