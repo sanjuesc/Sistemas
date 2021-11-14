@@ -27,10 +27,8 @@ Boolean done = false;
                 System.out.println("tienes los parametros");
                 if (!done) {
                     try {
-                        try (PrintWriter writer = response.getWriter()) {
-                            cargarCosas(writer);
-                            done = true;
-                        }
+                        cargarCosas();
+                        done = true;
                     } catch (SQLException | ClassNotFoundException throwables) {
                         throwables.printStackTrace();
                         done = false;
@@ -102,7 +100,7 @@ Boolean done = false;
 
 }
 
-    private void cargarCosas(PrintWriter writer) throws IOException, SQLException, ClassNotFoundException {
+    private void cargarCosas() throws IOException, SQLException, ClassNotFoundException {
                 System.out.println("cargamos todo");
                 String user = System.getenv("JDBC_USER");
                 String pass = System.getenv("JDBC_PASS");
@@ -129,7 +127,6 @@ Boolean done = false;
                     }
                     con.close();
                 } catch (Exception ex) {
-                    writer.write(ex.getMessage());
                     ex.printStackTrace();
                 }
 
