@@ -15,8 +15,8 @@ String url = System.getenv("JDBC_URL");
 Boolean done = false;
 
     public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
-        HttpSession session = request.getSession(false);
-        if (session == null) { //si no tiene sesion comprobamos que tenga los parametros
+        Cookie c[]=request.getCookies();
+        if (c[1] != null) { //si no tiene sesion comprobamos que tenga los parametros
             if(request.getParameter("uname") == null || request.getParameter("psw")==null ) { //si no tiene los parametros a tomar por culo
                 request.getSession(false).setAttribute("pls", "si");
                 System.out.println("no tienes los parametros");
@@ -50,7 +50,7 @@ Boolean done = false;
                         request.getSession().setAttribute("incorrecto","si");
                         request.getRequestDispatcher("index.jsp").forward(request, response);
                     }else{
-                        HttpSession sesionNueva = request.getSession();
+                        Cookie c1=new Cookie("userName",usuario);
                         cosas(response);
                     }
                 } catch (ClassNotFoundException e) {
