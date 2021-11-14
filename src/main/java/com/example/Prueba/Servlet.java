@@ -16,7 +16,12 @@ Boolean done = false;
 
     public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
         Cookie c[]=request.getCookies();
-        if (c==null) { //mira me da pereza, si no tiene cookies fuera si las tiene dentro
+        System.out.println(c.length);
+        for (int i=0; i<c.length; i++){
+            System.out.println(c[i].getName());
+            System.out.println(c[i].getValue());
+        }
+        if (c.length>=1) { //mira me da pereza, si no tiene cookies fuera si las tiene dentro
             if(request.getParameter("uname") == null || request.getParameter("psw")==null ) { //si no tiene los parametros a tomar por culo
                 request.getSession().setAttribute("pls", "si");
                 System.out.println("no tienes los parametros");
@@ -61,10 +66,6 @@ Boolean done = false;
                 }
             }
         }else{
-            System.out.println(c.length);
-            for (int i=0; i<c.length; i++){
-                System.out.println(c[i].getName());
-            }
                 cosas(response);
             }
         }
