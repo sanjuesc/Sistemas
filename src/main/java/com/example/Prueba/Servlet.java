@@ -29,6 +29,7 @@ Boolean done = false;
                     PreparedStatement st=con.prepareStatement("select name from user where name=? and pass = ?");
                     st.setString(1, usuario);
                     st.setString(2, contra);
+                    System.out.println(st);
                     ResultSet rs = st.executeQuery();
                     if(rs.next()==false){
                         request.getSession().setAttribute("incorrecto","si");
