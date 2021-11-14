@@ -16,7 +16,6 @@ Boolean done = false;
 
     public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
         Cookie c[]=request.getCookies();
-        System.out.println(c.length);
         for (int i=0; i<c.length; i++){
             System.out.println(c[i].getName());
             System.out.println(c[i].getValue());
@@ -45,6 +44,7 @@ Boolean done = false;
                 try{
                     Class.forName("com.mysql.jdbc.Driver");
                     Connection con = DriverManager.getConnection(url,user,pass);
+                    con.createStatement().executeQuery("use SISTEMAS");
                     PreparedStatement st=con.prepareStatement("select name from user where name=? and pass = ?");
                     st.setString(1, usuario);
                     st.setString(2, contra);
