@@ -144,7 +144,7 @@ Boolean done = false;
                     while(rsdatos.next()){
                         Integer cuantas = rsdatos.getMetaData().getColumnCount();
                         writer.println("<tr>\n");
-                        for (int i = 0; i<cuantas; i++){
+                        for (int i = 1; i<cuantas+1; i++){
                             writer.println("<td>" + rsdatos.getString(i)+"</td>");
                         }
                         writer.println("</tr>");
