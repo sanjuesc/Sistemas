@@ -92,6 +92,28 @@ Boolean done = false;
                     "  max-height: 0;\n" +
                     "  overflow: hidden;\n" +
                     "  transition: max-height 0.2s ease-out;\n" +
+                    "}" +
+                    "#bds {\n" +
+                    "  font-family: Arial, Helvetica, sans-serif;\n" +
+                    "  border-collapse: collapse;\n" +
+                    "  width: 100%;\n" +
+                    "}\n" +
+                    "\n" +
+                    "#bds td, #bds th {\n" +
+                    "  border: 1px solid #ddd;\n" +
+                    "  padding: 8px;\n" +
+                    "}\n" +
+                    "\n" +
+                    "#bds tr:nth-child(even){background-color: #f2f2f2;}\n" +
+                    "\n" +
+                    "#bds tr:hover {background-color: #ddd;}\n" +
+                    "\n" +
+                    "#bds th {\n" +
+                    "  padding-top: 12px;\n" +
+                    "  padding-bottom: 12px;\n" +
+                    "  text-align: left;\n" +
+                    "  background-color: #04AA6D;\n" +
+                    "  color: white;\n" +
                     "}</style>");
             writer.println("<title>MyServlet.java:doGet(): Servlet code!</title>");
             writer.println("</head>");
@@ -99,8 +121,65 @@ Boolean done = false;
             try {
                 writer.println("<button class=\"accordion\">Section 1</button>\n" +
                         "<div class=\"panel\">\n" +
-                        "  <p>Lorem ipsum...</p>\n" +
+                        "  <table id=\"bds\">\n" +
+                        "  <tr>\n" +
+                        "    <th>Company</th>\n" +
+                        "    <th>Contact</th>\n" +
+                        "    <th>Country</th>\n" +
+                        "  </tr>\n" +
+                        "  <tr>\n" +
+                        "    <td>Alfreds Futterkiste</td>\n" +
+                        "    <td>Maria Anders</td>\n" +
+                        "    <td>Germany</td>\n" +
+                        "  </tr>\n" +
+                        "  <tr>\n" +
+                        "    <td>Berglunds snabbköp</td>\n" +
+                        "    <td>Christina Berglund</td>\n" +
+                        "    <td>Sweden</td>\n" +
+                        "  </tr>\n" +
+                        "  <tr>\n" +
+                        "    <td>Centro comercial Moctezuma</td>\n" +
+                        "    <td>Francisco Chang</td>\n" +
+                        "    <td>Mexico</td>\n" +
+                        "  </tr>\n" +
+                        "  <tr>\n" +
+                        "    <td>Ernst Handel</td>\n" +
+                        "    <td>Roland Mendel</td>\n" +
+                        "    <td>Austria</td>\n" +
+                        "  </tr>\n" +
+                        "  <tr>\n" +
+                        "    <td>Island Trading</td>\n" +
+                        "    <td>Helen Bennett</td>\n" +
+                        "    <td>UK</td>\n" +
+                        "  </tr>\n" +
+                        "  <tr>\n" +
+                        "    <td>Königlich Essen</td>\n" +
+                        "    <td>Philip Cramer</td>\n" +
+                        "    <td>Germany</td>\n" +
+                        "  </tr>\n" +
+                        "  <tr>\n" +
+                        "    <td>Laughing Bacchus Winecellars</td>\n" +
+                        "    <td>Yoshi Tannamuri</td>\n" +
+                        "    <td>Canada</td>\n" +
+                        "  </tr>\n" +
+                        "  <tr>\n" +
+                        "    <td>Magazzini Alimentari Riuniti</td>\n" +
+                        "    <td>Giovanni Rovelli</td>\n" +
+                        "    <td>Italy</td>\n" +
+                        "  </tr>\n" +
+                        "  <tr>\n" +
+                        "    <td>North/South</td>\n" +
+                        "    <td>Simon Crowther</td>\n" +
+                        "    <td>UK</td>\n" +
+                        "  </tr>\n" +
+                        "  <tr>\n" +
+                        "    <td>Paris spécialités</td>\n" +
+                        "    <td>Marie Bertrand</td>\n" +
+                        "    <td>France</td>\n" +
+                        "  </tr>\n" +
+                        "</table>\n" +
                         "</div>");
+
                 writer.println("<script>\n" +
                         "var acc = document.getElementsByClassName(\"accordion\");\n" +
                         "var i;\n" +
