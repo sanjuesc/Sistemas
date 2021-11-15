@@ -72,7 +72,7 @@ Boolean done = false;
             writer.println("<title>MyServlet.java:doGet(): Servlet code!</title>");
             writer.println("</head>");
             writer.println("<body>");
-            writer.println(request.getContextPath());
+            writer.println(request.getContextPath() +" ese es el path");
             try {
 
                 Class.forName("com.mysql.jdbc.Driver");
