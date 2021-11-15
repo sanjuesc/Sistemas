@@ -137,13 +137,15 @@ Boolean done = false;
                         String c = rscolumnas.getString(1);
                         writer.println("<th>"+c+"</th>");
                     }
-                    writer.println("  </tr>\n" +
-                                            "  <tr>\n" +
-                                            "    <td>Paris spécialités</td>\n" +
-                                            "    <td>Marie Bertrand</td>\n" +
-                                            "    <td>France</td>\n" +
-                                            "  </tr>" +
-
+                    writer.println("</tr>\n<tr>");
+                    PreparedStatement datos = con.prepareStatement("SELECT * FROM ?");
+                    datos.setString(1, m);
+                    ResultSet rsdatos = datos.executeQuery();
+                    Integer cuantas = rsdatos.getMetaData().getColumnCount();
+                    for (int i = 0; i<cuantas; i++){
+                        writer.println("<td>" + rsdatos.getString(i)+"</td>");
+                    }
+                    writer.println("  </tr>" +
                             "</table>\n" +
                             "</div>");
 
