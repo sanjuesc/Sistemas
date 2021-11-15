@@ -119,85 +119,92 @@ Boolean done = false;
             writer.println("</head>");
             writer.println("<body>");
             try {
-                writer.println("<button class=\"accordion\">Section 1</button>\n" +
-                        "<div class=\"panel\">\n" +
-                        "  <table id=\"bds\">\n" +
-                        "  <tr>\n" +
-                        "    <th>Company</th>\n" +
-                        "    <th>Contact</th>\n" +
-                        "    <th>Country</th>\n" +
-                        "  </tr>\n" +
-                        "  <tr>\n" +
-                        "    <td>Alfreds Futterkiste</td>\n" +
-                        "    <td>Maria Anders</td>\n" +
-                        "    <td>Germany</td>\n" +
-                        "  </tr>\n" +
-                        "  <tr>\n" +
-                        "    <td>Berglunds snabbköp</td>\n" +
-                        "    <td>Christina Berglund</td>\n" +
-                        "    <td>Sweden</td>\n" +
-                        "  </tr>\n" +
-                        "  <tr>\n" +
-                        "    <td>Centro comercial Moctezuma</td>\n" +
-                        "    <td>Francisco Chang</td>\n" +
-                        "    <td>Mexico</td>\n" +
-                        "  </tr>\n" +
-                        "  <tr>\n" +
-                        "    <td>Ernst Handel</td>\n" +
-                        "    <td>Roland Mendel</td>\n" +
-                        "    <td>Austria</td>\n" +
-                        "  </tr>\n" +
-                        "  <tr>\n" +
-                        "    <td>Island Trading</td>\n" +
-                        "    <td>Helen Bennett</td>\n" +
-                        "    <td>UK</td>\n" +
-                        "  </tr>\n" +
-                        "  <tr>\n" +
-                        "    <td>Königlich Essen</td>\n" +
-                        "    <td>Philip Cramer</td>\n" +
-                        "    <td>Germany</td>\n" +
-                        "  </tr>\n" +
-                        "  <tr>\n" +
-                        "    <td>Laughing Bacchus Winecellars</td>\n" +
-                        "    <td>Yoshi Tannamuri</td>\n" +
-                        "    <td>Canada</td>\n" +
-                        "  </tr>\n" +
-                        "  <tr>\n" +
-                        "    <td>Magazzini Alimentari Riuniti</td>\n" +
-                        "    <td>Giovanni Rovelli</td>\n" +
-                        "    <td>Italy</td>\n" +
-                        "  </tr>\n" +
-                        "  <tr>\n" +
-                        "    <td>North/South</td>\n" +
-                        "    <td>Simon Crowther</td>\n" +
-                        "    <td>UK</td>\n" +
-                        "  </tr>\n" +
-                        "  <tr>\n" +
-                        "    <td>Paris spécialités</td>\n" +
-                        "    <td>Marie Bertrand</td>\n" +
-                        "    <td>France</td>\n" +
-                        "  </tr>\n" +
-                        "</table>\n" +
-                        "</div>");
-
-                writer.println("<script>\n" +
-                        "var acc = document.getElementsByClassName(\"accordion\");\n" +
-                        "var i;\n" +
-                        "\n" +
-                        "for (i = 0; i < acc.length; i++) {\n" +
-                        "  acc[i].addEventListener(\"click\", function() {\n" +
-                        "    this.classList.toggle(\"active\");\n" +
-                        "    var panel = this.nextElementSibling;\n" +
-                        "    if (panel.style.maxHeight) {\n" +
-                        "      panel.style.maxHeight = null;\n" +
-                        "    } else {\n" +
-                        "      panel.style.maxHeight = panel.scrollHeight + \"px\";\n" +
-                        "    } \n" +
-                        "  });\n" +
-                        "}\n" +
-                        "</script>");
                 Class.forName("com.mysql.jdbc.Driver");
                 Connection con = DriverManager.getConnection(url, user, pass);
+                PreparedStatement tablas = con.prepareStatement("SELECT table_name FROM information_schema.tables\n" +
+                        "WHERE table_schema = 'SISTEMAS'");
+                ResultSet rstablas = tablas.executeQuery();
+                while(rstablas.next()){
+                    String m = rstablas.getString("table_name");
+                    writer.println("<button class=\"accordion\">"+ m +"</button>\n" +
+                            "<div class=\"panel\">\n" +
+                            "  <table id=\"bds\">\n" +
+                            "  <tr>\n" +
+                            "    <th>Company</th>\n" +
+                            "    <th>Contact</th>\n" +
+                            "    <th>Country</th>\n" +
+                            "  </tr>\n" +
+                            "  <tr>\n" +
+                            "    <td>Alfreds Futterkiste</td>\n" +
+                            "    <td>Maria Anders</td>\n" +
+                            "    <td>Germany</td>\n" +
+                            "  </tr>\n" +
+                            "  <tr>\n" +
+                            "    <td>Berglunds snabbköp</td>\n" +
+                            "    <td>Christina Berglund</td>\n" +
+                            "    <td>Sweden</td>\n" +
+                            "  </tr>\n" +
+                            "  <tr>\n" +
+                            "    <td>Centro comercial Moctezuma</td>\n" +
+                            "    <td>Francisco Chang</td>\n" +
+                            "    <td>Mexico</td>\n" +
+                            "  </tr>\n" +
+                            "  <tr>\n" +
+                            "    <td>Ernst Handel</td>\n" +
+                            "    <td>Roland Mendel</td>\n" +
+                            "    <td>Austria</td>\n" +
+                            "  </tr>\n" +
+                            "  <tr>\n" +
+                            "    <td>Island Trading</td>\n" +
+                            "    <td>Helen Bennett</td>\n" +
+                            "    <td>UK</td>\n" +
+                            "  </tr>\n" +
+                            "  <tr>\n" +
+                            "    <td>Königlich Essen</td>\n" +
+                            "    <td>Philip Cramer</td>\n" +
+                            "    <td>Germany</td>\n" +
+                            "  </tr>\n" +
+                            "  <tr>\n" +
+                            "    <td>Laughing Bacchus Winecellars</td>\n" +
+                            "    <td>Yoshi Tannamuri</td>\n" +
+                            "    <td>Canada</td>\n" +
+                            "  </tr>\n" +
+                            "  <tr>\n" +
+                            "    <td>Magazzini Alimentari Riuniti</td>\n" +
+                            "    <td>Giovanni Rovelli</td>\n" +
+                            "    <td>Italy</td>\n" +
+                            "  </tr>\n" +
+                            "  <tr>\n" +
+                            "    <td>North/South</td>\n" +
+                            "    <td>Simon Crowther</td>\n" +
+                            "    <td>UK</td>\n" +
+                            "  </tr>\n" +
+                            "  <tr>\n" +
+                            "    <td>Paris spécialités</td>\n" +
+                            "    <td>Marie Bertrand</td>\n" +
+                            "    <td>France</td>\n" +
+                            "  </tr>\n" +
+                            "</table>\n" +
+                            "</div>");
+
+                    writer.println("<script>\n" +
+                            "var acc = document.getElementsByClassName(\"accordion\");\n" +
+                            "var i;\n" +
+                            "\n" +
+                            "for (i = 0; i < acc.length; i++) {\n" +
+                            "  acc[i].addEventListener(\"click\", function() {\n" +
+                            "    this.classList.toggle(\"active\");\n" +
+                            "    var panel = this.nextElementSibling;\n" +
+                            "    if (panel.style.maxHeight) {\n" +
+                            "      panel.style.maxHeight = null;\n" +
+                            "    } else {\n" +
+                            "      panel.style.maxHeight = panel.scrollHeight + \"px\";\n" +
+                            "    } \n" +
+                            "  });\n" +
+                            "}\n" +
+                            "</script>");
+
+                }
                 PreparedStatement st = con.prepareStatement("select now()");
                 ResultSet rs = st.executeQuery();
                 if (rs.next()) {
