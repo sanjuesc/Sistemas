@@ -143,7 +143,12 @@
         <td valign="top">
 
             <h2>Bienvenido a mi aplicación</h2><br>
+
+            <% if (request.getParameter("a") == "b") { %>
+            Por favor <b style='color:red;'>inicia sesión</b> para continuar<br>
+            <% } else { %>
             Por favor inicia sesión para continuar<br>
+            <% } %>
 
 
 
