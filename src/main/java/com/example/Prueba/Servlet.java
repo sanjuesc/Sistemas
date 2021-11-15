@@ -134,7 +134,7 @@ Boolean done = false;
                             columnas.setString(1, m);
                             ResultSet rscolumnas = tablas.executeQuery();
                             while(rscolumnas.next()){
-                                String c = rscolumnas.getString("COLUMN_NAME");
+                                String c = rscolumnas.getString(1);
                                 writer.println("<th>"+c+"</th>");
                             }
                             writer.println("  </tr>\n" +
