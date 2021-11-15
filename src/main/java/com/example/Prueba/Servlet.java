@@ -69,7 +69,30 @@ Boolean done = false;
             writer.println("<!DOCTYPE html><html>");
             writer.println("<head>");
             writer.println("<meta charset=\"UTF-8\" />");
-            writer.println("<link rel=\"stylesheet\" type=\"text/css\" href=\"style.css\"/>");
+            writer.println("    <style>.accordion {\n" +
+                    "  background-color: #eee;\n" +
+                    "  color: #444;\n" +
+                    "  cursor: pointer;\n" +
+                    "  padding: 18px;\n" +
+                    "  width: 100%;\n" +
+                    "  border: none;\n" +
+                    "  text-align: left;\n" +
+                    "  outline: none;\n" +
+                    "  font-size: 15px;\n" +
+                    "  transition: 0.4s;\n" +
+                    "}\n" +
+                    "\n" +
+                    ".active, .accordion:hover {\n" +
+                    "  background-color: #ccc;\n" +
+                    "}\n" +
+                    "\n" +
+                    ".panel {\n" +
+                    "  padding: 0 18px;\n" +
+                    "  background-color: white;\n" +
+                    "  max-height: 0;\n" +
+                    "  overflow: hidden;\n" +
+                    "  transition: max-height 0.2s ease-out;\n" +
+                    "}</style>");
             writer.println("<title>MyServlet.java:doGet(): Servlet code!</title>");
             writer.println("</head>");
             writer.println("<body>");
@@ -78,6 +101,22 @@ Boolean done = false;
                         "<div class=\"panel\">\n" +
                         "  <p>Lorem ipsum...</p>\n" +
                         "</div>");
+                writer.println("<script>\n" +
+                        "var acc = document.getElementsByClassName(\"accordion\");\n" +
+                        "var i;\n" +
+                        "\n" +
+                        "for (i = 0; i < acc.length; i++) {\n" +
+                        "  acc[i].addEventListener(\"click\", function() {\n" +
+                        "    this.classList.toggle(\"active\");\n" +
+                        "    var panel = this.nextElementSibling;\n" +
+                        "    if (panel.style.maxHeight) {\n" +
+                        "      panel.style.maxHeight = null;\n" +
+                        "    } else {\n" +
+                        "      panel.style.maxHeight = panel.scrollHeight + \"px\";\n" +
+                        "    } \n" +
+                        "  });\n" +
+                        "}\n" +
+                        "</script>");
                 Class.forName("com.mysql.jdbc.Driver");
                 Connection con = DriverManager.getConnection(url, user, pass);
                 PreparedStatement st = con.prepareStatement("select now()");
