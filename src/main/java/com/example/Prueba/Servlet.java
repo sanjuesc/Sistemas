@@ -130,14 +130,14 @@ Boolean done = false;
                             "<div class=\"panel\">\n" +
                             "  <table id=\"bds\">\n" +
                             "  <tr>\n");
-                            PreparedStatement columnas = con.prepareStatement("SELECT COLUMN_NAME FROM INFORMATION_SCHEMA.COLUMNS WHERE TABLE_SCHEMA = 'SISTEMAS' AND TABLE_NAME = ?");
-                            columnas.setString(1, m);
-                            ResultSet rscolumnas = tablas.executeQuery();
-                            while(rscolumnas.next()){
-                                String c = rscolumnas.getString(1);
-                                writer.println("<th>"+c+"</th>");
-                            }
-                            writer.println("  </tr>\n" +
+                    PreparedStatement columnas = con.prepareStatement("SELECT COLUMN_NAME FROM INFORMATION_SCHEMA.COLUMNS WHERE TABLE_SCHEMA = 'SISTEMAS' AND TABLE_NAME = ?");
+                    columnas.setString(1, m);
+                    ResultSet rscolumnas = columnas.executeQuery();
+                    while(rscolumnas.next()){
+                        String c = rscolumnas.getString(1);
+                        writer.println("<th>"+c+"</th>");
+                    }
+                    writer.println("  </tr>\n" +
                                             "  <tr>\n" +
                                             "    <td>Paris spécialités</td>\n" +
                                             "    <td>Marie Bertrand</td>\n" +
