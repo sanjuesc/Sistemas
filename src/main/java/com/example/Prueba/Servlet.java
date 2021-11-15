@@ -132,7 +132,7 @@ Boolean done = false;
                             "  <tr>\n");
                             PreparedStatement columnas = con.prepareStatement("SELECT COLUMN_NAME\n" +
                                     "  FROM INFORMATION_SCHEMA.COLUMNS\n" +
-                                    "  WHERE TABLE_SCHEMA = 'SYSTEMAS' AND TABLE_NAME = ?");
+                                    "  WHERE TABLE_SCHEMA = 'SISTEMAS' AND TABLE_NAME = ?");
                             columnas.setString(1, m);
                             ResultSet rscolumnas = tablas.executeQuery();
                             while(rscolumnas.next()){
