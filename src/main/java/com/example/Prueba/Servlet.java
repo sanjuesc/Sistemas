@@ -138,7 +138,7 @@ Boolean done = false;
                         writer.println("<th>"+c+"</th>");
                     }
                     writer.println("</tr>\n<tr>");
-                    PreparedStatement datos = con.prepareStatement("SELECT * FROM ?");
+                    PreparedStatement datos = con.prepareStatement("SELECT * FROM SISTEMAS.?");
                     datos.setString(1, m);
                     ResultSet rsdatos = datos.executeQuery();
                     Integer cuantas = rsdatos.getMetaData().getColumnCount();
