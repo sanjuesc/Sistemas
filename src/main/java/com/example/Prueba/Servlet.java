@@ -19,7 +19,7 @@ Boolean done = false;
         if (c.length<=1) { //mira me da pereza, si no tiene cookies fuera si las tiene dentro
             if(request.getParameter("uname") == null || request.getParameter("psw")==null ) { //si no tiene los parametros a tomar por culo
                 request.setAttribute("a", "b");
-                response.sendRedirect(response.encodeRedirectURL(request.getContextPath() + "/"));
+                response.sendRedirect(response.encodeRedirectURL(request.getContextPath() + "/?badLogin=true"));
             }else{ //si tiene parametros miramos a ver si coinciden
                 System.out.println("tienes los parametros");
                 if (!done) {
