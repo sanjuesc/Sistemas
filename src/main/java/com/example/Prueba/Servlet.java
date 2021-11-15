@@ -141,9 +141,8 @@ Boolean done = false;
 
                     PreparedStatement datos = con.prepareStatement("select * from "+m);
                     ResultSet rsdatos =datos.executeQuery();
-                    Integer cuantas = rsdatos.getMetaData().getColumnCount();
-                    System.out.println(cuantas);
                     while(rsdatos.next()){
+                        Integer cuantas = rsdatos.getMetaData().getColumnCount();
                         writer.println("<tr>\n");
                         for (int i = 0; i<cuantas; i++){
                             writer.println("<td>" + rsdatos.getString(i)+"</td>");
