@@ -137,17 +137,21 @@ Boolean done = false;
                         String c = rscolumnas.getString(1);
                         writer.println("<th>"+c+"</th>");
                     }
-                    writer.println("</tr>\n<tr>");
+                    writer.println("</tr>\n");
 
                     PreparedStatement datos = con.prepareStatement("select * from "+m);
                     ResultSet rsdatos =datos.executeQuery();
                     Integer cuantas = rsdatos.getMetaData().getColumnCount();
                     System.out.println(cuantas);
-                    for (int i = 0; i<cuantas; i++){
-                        writer.println("<td>" + rsdatos.getString(i)+"</td>");
+                    while(rsdatos.next()){
+                        writer.println("<tr>\n");
+                        for (int i = 0; i<cuantas; i++){
+                            writer.println("<td>" + rsdatos.getString(i)+"</td>");
+                        }
+                        writer.println("</tr>");
                     }
-                    writer.println("  </tr>" +
-                            "</table>\n" +
+
+                    writer.println("</table>\n" +
                             "</div>");
 
                     writer.println("<script>\n" +
