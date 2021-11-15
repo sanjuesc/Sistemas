@@ -129,61 +129,23 @@ Boolean done = false;
                     writer.println("<button class=\"accordion\">"+ m +"</button>\n" +
                             "<div class=\"panel\">\n" +
                             "  <table id=\"bds\">\n" +
-                            "  <tr>\n" +
-                            "    <th>Company</th>\n" +
-                            "    <th>Contact</th>\n" +
-                            "    <th>Country</th>\n" +
-                            "  </tr>\n" +
-                            "  <tr>\n" +
-                            "    <td>Alfreds Futterkiste</td>\n" +
-                            "    <td>Maria Anders</td>\n" +
-                            "    <td>Germany</td>\n" +
-                            "  </tr>\n" +
-                            "  <tr>\n" +
-                            "    <td>Berglunds snabbköp</td>\n" +
-                            "    <td>Christina Berglund</td>\n" +
-                            "    <td>Sweden</td>\n" +
-                            "  </tr>\n" +
-                            "  <tr>\n" +
-                            "    <td>Centro comercial Moctezuma</td>\n" +
-                            "    <td>Francisco Chang</td>\n" +
-                            "    <td>Mexico</td>\n" +
-                            "  </tr>\n" +
-                            "  <tr>\n" +
-                            "    <td>Ernst Handel</td>\n" +
-                            "    <td>Roland Mendel</td>\n" +
-                            "    <td>Austria</td>\n" +
-                            "  </tr>\n" +
-                            "  <tr>\n" +
-                            "    <td>Island Trading</td>\n" +
-                            "    <td>Helen Bennett</td>\n" +
-                            "    <td>UK</td>\n" +
-                            "  </tr>\n" +
-                            "  <tr>\n" +
-                            "    <td>Königlich Essen</td>\n" +
-                            "    <td>Philip Cramer</td>\n" +
-                            "    <td>Germany</td>\n" +
-                            "  </tr>\n" +
-                            "  <tr>\n" +
-                            "    <td>Laughing Bacchus Winecellars</td>\n" +
-                            "    <td>Yoshi Tannamuri</td>\n" +
-                            "    <td>Canada</td>\n" +
-                            "  </tr>\n" +
-                            "  <tr>\n" +
-                            "    <td>Magazzini Alimentari Riuniti</td>\n" +
-                            "    <td>Giovanni Rovelli</td>\n" +
-                            "    <td>Italy</td>\n" +
-                            "  </tr>\n" +
-                            "  <tr>\n" +
-                            "    <td>North/South</td>\n" +
-                            "    <td>Simon Crowther</td>\n" +
-                            "    <td>UK</td>\n" +
-                            "  </tr>\n" +
-                            "  <tr>\n" +
-                            "    <td>Paris spécialités</td>\n" +
-                            "    <td>Marie Bertrand</td>\n" +
-                            "    <td>France</td>\n" +
-                            "  </tr>\n" +
+                            "  <tr>\n");
+                            PreparedStatement columnas = con.prepareStatement("SELECT COLUMN_NAME\n" +
+                                    "  FROM INFORMATION_SCHEMA.COLUMNS\n" +
+                                    "  WHERE TABLE_SCHEMA = 'SYSTEMAS' AND TABLE_NAME = ?");
+                            columnas.setString(1, m);
+                            ResultSet rscolumnas = tablas.executeQuery();
+                            while(rscolumnas.next()){
+                                String c = rscolumnas.getString("COLUMN_NAME");
+                                writer.println("<th>"+c+"</th>");
+                            }
+                            writer.println("  </tr>\n" +
+                                            "  <tr>\n" +
+                                            "    <td>Paris spécialités</td>\n" +
+                                            "    <td>Marie Bertrand</td>\n" +
+                                            "    <td>France</td>\n" +
+                                            "  </tr>" +
+
                             "</table>\n" +
                             "</div>");
 
