@@ -69,12 +69,15 @@ Boolean done = false;
             writer.println("<!DOCTYPE html><html>");
             writer.println("<head>");
             writer.println("<meta charset=\"UTF-8\" />");
+            writer.println("<link rel=\"stylesheet\" type=\"text/css\" href=\"style.css\"/>");
             writer.println("<title>MyServlet.java:doGet(): Servlet code!</title>");
             writer.println("</head>");
             writer.println("<body>");
-            writer.println(request.getContextPath() +" ese es el path");
             try {
-
+                writer.println("<button class=\"accordion\">Section 1</button>\n" +
+                        "<div class=\"panel\">\n" +
+                        "  <p>Lorem ipsum...</p>\n" +
+                        "</div>");
                 Class.forName("com.mysql.jdbc.Driver");
                 Connection con = DriverManager.getConnection(url, user, pass);
                 PreparedStatement st = con.prepareStatement("select now()");
