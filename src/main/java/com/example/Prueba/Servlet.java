@@ -18,7 +18,6 @@ Boolean done = false;
         Cookie c[]=request.getCookies();
         if (c.length<=1) { //mira me da pereza, si no tiene cookies fuera si las tiene dentro
             if(request.getParameter("uname") == null || request.getParameter("psw")==null ) { //si no tiene los parametros a tomar por culo
-                request.setAttribute("a", "b");
                 response.sendRedirect(response.encodeRedirectURL(request.getContextPath() + "/?badLogin=true"));
             }else{ //si tiene parametros miramos a ver si coinciden
                 System.out.println("tienes los parametros");
@@ -44,12 +43,12 @@ Boolean done = false;
                     ResultSet rs = st.executeQuery();
                     if(!rs.next()){
                         request.setAttribute("a", "b");
-                        response.sendRedirect(response.encodeRedirectURL(request.getContextPath() + "/"));
+                        response.sendRedirect(response.encodeRedirectURL(request.getContextPath() + "/?badLogin=true\""));
                     }else{
                         System.out.println("2");
                         Cookie c1=new Cookie("userName",usuario);
                         response.addCookie(c1);
-                        cosas(response);
+                        cosas(response, request);
                     }
                 } catch (ClassNotFoundException e) {
                     System.out.println(e.getMessage());
@@ -58,11 +57,11 @@ Boolean done = false;
                 }
             }
         }else{
-                cosas(response);
+                cosas(response, request);
             }
         }
 
-    private void cosas(HttpServletResponse response) throws IOException {
+    private void cosas(HttpServletResponse response, HttpServletRequest request) throws IOException {
         System.out.println("hemos entrado a cosas");
         response.setContentType("text/html");
         response.setCharacterEncoding("UTF-8");
@@ -73,6 +72,7 @@ Boolean done = false;
             writer.println("<title>MyServlet.java:doGet(): Servlet code!</title>");
             writer.println("</head>");
             writer.println("<body>");
+            writer.println(request.getContextPath());
             try {
 
                 Class.forName("com.mysql.jdbc.Driver");
