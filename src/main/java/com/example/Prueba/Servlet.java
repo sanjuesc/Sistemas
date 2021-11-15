@@ -138,10 +138,9 @@ Boolean done = false;
                         writer.println("<th>"+c+"</th>");
                     }
                     writer.println("</tr>\n<tr>");
-                    PreparedStatement datos = con.prepareStatement("SELECT * FROM ?");
-                    datos.setString(1, m);
-                    System.out.println(datos.toString());
-                    ResultSet rsdatos = datos.executeQuery();
+
+                    PreparedStatement datos = con.prepareStatement("select * from "+m);
+                    ResultSet rsdatos =datos.getResultSet();
                     Integer cuantas = rsdatos.getMetaData().getColumnCount();
                     for (int i = 0; i<cuantas; i++){
                         writer.println("<td>" + rsdatos.getString(i)+"</td>");
