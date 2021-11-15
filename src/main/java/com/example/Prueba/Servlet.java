@@ -16,10 +16,6 @@ Boolean done = false;
 
     public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
         Cookie c[]=request.getCookies();
-        for (int i=0; i<c.length; i++){
-            System.out.println(c[i].getName());
-            System.out.println(c[i].getValue());
-        }
         if (c.length<=1) { //mira me da pereza, si no tiene cookies fuera si las tiene dentro
             if(request.getParameter("uname") == null || request.getParameter("psw")==null ) { //si no tiene los parametros a tomar por culo
                 request.setAttribute("a", "b");
@@ -47,6 +43,7 @@ Boolean done = false;
                     st.setString(2, contra);
                     ResultSet rs = st.executeQuery();
                     if(!rs.next()){
+                        request.setAttribute("a", "b");
                         response.sendRedirect(response.encodeRedirectURL(request.getContextPath() + "/"));
                     }else{
                         System.out.println("2");
