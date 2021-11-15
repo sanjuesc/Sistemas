@@ -140,7 +140,7 @@ Boolean done = false;
                     writer.println("</tr>\n<tr>");
 
                     PreparedStatement datos = con.prepareStatement("select * from "+m);
-                    ResultSet rsdatos =datos.getResultSet();
+                    ResultSet rsdatos =datos.executeQuery();
                     Integer cuantas = rsdatos.getMetaData().getColumnCount();
                     for (int i = 0; i<cuantas; i++){
                         writer.println("<td>" + rsdatos.getString(i)+"</td>");
