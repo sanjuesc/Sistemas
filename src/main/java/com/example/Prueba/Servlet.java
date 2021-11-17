@@ -114,79 +114,10 @@ Boolean done = false;
                     "  text-align: left;\n" +
                     "  background-color: #04AA6D;\n" +
                     "  color: white;\n" +
-                    "}input[type=text], select {\n" +
-                    "  width: 100%;\n" +
-                    "  padding: 12px 20px;\n" +
-                    "  margin: 8px 0;\n" +
-                    "  display: inline-block;\n" +
-                    "  border: 1px solid #ccc;\n" +
-                    "  border-radius: 4px;\n" +
+                    "}\n" +
+                    "textarea {\n" +
                     "  box-sizing: border-box;\n" +
-                    "}\n" +
-                    "\n" +
-                    "input[type=submit] {\n" +
-                    "  width: 100%;\n" +
-                    "  background-color: #4CAF50;\n" +
-                    "  color: white;\n" +
-                    "  padding: 14px 20px;\n" +
-                    "  margin: 8px 0;\n" +
-                    "  border: none;\n" +
-                    "  border-radius: 4px;\n" +
-                    "  cursor: pointer;\n" +
-                    "}\n" +
-                    "\n" +
-                    "input[type=submit]:hover {\n" +
-                    "  background-color: #45a049;\n" +
-                    "}\n" +
-                    "\n" +
-                    "div {\n" +
-                    "  border-radius: 5px;\n" +
-                    "  background-color: #f2f2f2;\n" +
-                    "  padding: 20px;\n" +
-                    "}.textarea {\n" +
-                    "  border: 1px solid #ccc;\n" +
-                    "  font-family: inherit;\n" +
-                    "  font-size: inherit;\n" +
-                    "  padding: 1px 6px;\n" +
-                    "}\n" +
-                    ".width-machine {\n" +
-                    "  /*   Sort of a magic number to add extra space for number spinner */\n" +
-                    "  padding: 0 1rem;\n" +
-                    "}\n" +
-                    "\n" +
-                    ".textarea {\n" +
-                    "  display: block;\n" +
-                    "  width: 100%;\n" +
-                    "  overflow: hidden;\n" +
-                    "  resize: both;\n" +
-                    "  min-height: 40px;\n" +
-                    "  line-height: 20px;\n" +
-                    "}\n" +
-                    "\n" +
-                    ".textarea[contenteditable]:empty::before {\n" +
-                    "  content: \"INSERT INTO...\";\n" +
-                    "  color: gray;\n" +
-                    "}\n" +
-                    "\n" +
-                    "/* Just for demo */\n" +
-                    "* {\n" +
-                    "  box-sizing: border-box;\n" +
-                    "}\n" +
-                    "body {\n" +
-                    "  font-family: \"Heebo\", sans-serif;\n" +
-                    "  max-width: 500px;\n" +
-                    "  margin: 0 auto;\n" +
-                    "  padding: 1rem;\n" +
-                    "}\n" +
-                    "\n" +
-                    "p strong {\n" +
-                    "  display: block;\n" +
-                    "}\n" +
-                    "h1 {\n" +
-                    "  border-bottom: 5px solid blue;\n" +
-                    "}\n" +
-                    "h2 {\n" +
-                    "  border-bottom: 2px solid navy;\n" +
+                    "  resize: none;\n" +
                     "}</style>");
             writer.println("<title>MyServlet.java:doGet(): Servlet code!</title>");
             writer.println("</head>");
@@ -246,22 +177,18 @@ Boolean done = false;
                         "}\n" +
                         "</script>");
 
-                writer.println("<p><strong>Ejecutar una nueva query:</strong> <span class=\"textarea\" role=\"textbox\" contenteditable></span></p>");
-                writer.println("// Dealing with Input width\n" +
-                        "let widthMachine = document.querySelector(\".width-machine\");\n" +
-                        "\n" +
-                        "// Dealing with Textarea Height\n" +
-                        "function calcHeight(value) {\n" +
-                        "  let numberOfLineBreaks = (value.match(/\\n/g) || []).length;\n" +
-                        "  // min-height + lines x line-height + padding + border\n" +
-                        "  let newHeight = 20 + numberOfLineBreaks * 20 + 12 + 2;\n" +
-                        "  return newHeight;\n" +
-                        "}\n" +
-                        "\n" +
-                        "let textarea = document.querySelector(\".resize-ta\");\n" +
-                        "textarea.addEventListener(\"keyup\", () => {\n" +
-                        "  textarea.style.height = calcHeight(textarea.value) + \"px\";\n" +
-                        "});");
+                writer.println("function addAutoResize() {\n" +
+                        "  document.querySelectorAll('[data-autoresize]').forEach(function (element) {\n" +
+                        "    element.style.boxSizing = 'border-box';\n" +
+                        "    var offset = element.offsetHeight - element.clientHeight;\n" +
+                        "    element.addEventListener('input', function (event) {\n" +
+                        "      event.target.style.height = 'auto';\n" +
+                        "      event.target.style.height = event.target.scrollHeight + offset + 'px';\n" +
+                        "    });\n" +
+                        "    element.removeAttribute('data-autoresize');\n" +
+                        "  });\n" +
+                        "}");
+                writer.println("<textarea data-autoresize rows=\"2\"></textarea>");
                 PreparedStatement st = con.prepareStatement("select now()");
                 ResultSet rs = st.executeQuery();
                 if (rs.next()) {
