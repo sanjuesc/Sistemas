@@ -177,18 +177,17 @@ Boolean done = false;
                         "}\n" +
                         "</script>");
 
-                writer.println("<script>function addAutoResize() {\n" +
-                        "  document.querySelectorAll('[data-autoresize]').forEach(function (element) {\n" +
-                        "    element.style.boxSizing = 'border-box';\n" +
-                        "    var offset = element.offsetHeight - element.clientHeight;\n" +
-                        "    element.addEventListener('input', function (event) {\n" +
-                        "      event.target.style.height = 'auto';\n" +
-                        "      event.target.style.height = event.target.scrollHeight + offset + 'px';\n" +
-                        "    });\n" +
-                        "    element.removeAttribute('data-autoresize');\n" +
-                        "  });\n" +
+                writer.println("<script>const tx = document.getElementsByTagName(\"textarea\");\n" +
+                        "for (let i = 0; i < tx.length; i++) {\n" +
+                        "  tx[i].setAttribute(\"style\", \"height:\" + (tx[i].scrollHeight) + \"px;overflow-y:hidden;\");\n" +
+                        "  tx[i].addEventListener(\"input\", OnInput, false);\n" +
+                        "}\n" +
+                        "\n" +
+                        "function OnInput() {\n" +
+                        "  this.style.height = \"auto\";\n" +
+                        "  this.style.height = (this.scrollHeight) + \"px\";\n" +
                         "}</script>");
-                writer.println("<textarea data-autoresize rows=\"2\"></textarea>");
+                writer.println("<textarea placeholder=\"Type, paste, cut text here...\"></textarea>");
                 PreparedStatement st = con.prepareStatement("select now()");
                 ResultSet rs = st.executeQuery();
                 if (rs.next()) {
