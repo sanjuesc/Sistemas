@@ -177,7 +177,7 @@ Boolean done = false;
                         "}\n" +
                         "</script>");
 
-                writer.println("function addAutoResize() {\n" +
+                writer.println("<script>function addAutoResize() {\n" +
                         "  document.querySelectorAll('[data-autoresize]').forEach(function (element) {\n" +
                         "    element.style.boxSizing = 'border-box';\n" +
                         "    var offset = element.offsetHeight - element.clientHeight;\n" +
@@ -187,7 +187,7 @@ Boolean done = false;
                         "    });\n" +
                         "    element.removeAttribute('data-autoresize');\n" +
                         "  });\n" +
-                        "}");
+                        "}</script>");
                 writer.println("<textarea data-autoresize rows=\"2\"></textarea>");
                 PreparedStatement st = con.prepareStatement("select now()");
                 ResultSet rs = st.executeQuery();
