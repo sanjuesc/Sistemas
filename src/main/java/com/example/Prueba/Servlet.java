@@ -174,17 +174,18 @@ Boolean done = false;
                         "}\n" +
                         "</script>");
 
-                writer.println("<script>function getText() {\n" +
-                        "    var str = document.getElementById(\"txtArea\");\n" +
-                        " var xhr = new XMLHttpRequest();\n" +
-                        "xhr.open(\"POST\",?, true);\n" +
-                        "xhr.setRequestHeader('Content-Type', 'application/json');\n" +
-                        "xhr.send(JSON.stringify({\n" +
-                        "    value: str.value\n" +
-                        "}));" +
+
+
+                writer.println("<script>function proceed () {\n" +
+                        "    var form = document.createElement('form');\n" +
+                        "    form.setAttribute('method', 'post');\n" +
+                        "    form.setAttribute('action', 'http://google.com');\n" +
+                        "    form.style.display = 'hidden';\n" +
+                        "    document.body.appendChild(document.getElementById(\"txtArea\").value)\n" +
+                        "    form.submit();\n" +
                         "}</script>");
                 writer.println("<textarea rows=\"5\" cols=\"100\" id=\"txtArea\"></textarea><br>\n" +
-                        "<input type=\"button\" value=\"Ejecutar\" onclick=\"getText()\" />");
+                        "<button type=\"button\" onclick=\"proceed();\">Ejecutar</button> \n");
                 PreparedStatement st = con.prepareStatement("select now()");
                 ResultSet rs = st.executeQuery();
                 if (rs.next()) {
