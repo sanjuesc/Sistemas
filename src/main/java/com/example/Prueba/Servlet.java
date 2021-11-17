@@ -154,24 +154,24 @@ Boolean done = false;
                     writer.println("</table>\n" +
                             "</div>");
 
-                    writer.println("<script>\n" +
-                            "var acc = document.getElementsByClassName(\"accordion\");\n" +
-                            "var i;\n" +
-                            "\n" +
-                            "for (i = 0; i < acc.length; i++) {\n" +
-                            "  acc[i].addEventListener(\"click\", function() {\n" +
-                            "    this.classList.toggle(\"active\");\n" +
-                            "    var panel = this.nextElementSibling;\n" +
-                            "    if (panel.style.maxHeight) {\n" +
-                            "      panel.style.maxHeight = null;\n" +
-                            "    } else {\n" +
-                            "      panel.style.maxHeight = panel.scrollHeight + \"px\";\n" +
-                            "    } \n" +
-                            "  });\n" +
-                            "}\n" +
-                            "</script>");
 
                 }
+                writer.println("<script>\n" +
+                        "var acc = document.getElementsByClassName(\"accordion\");\n" +
+                        "var i;\n" +
+                        "\n" +
+                        "for (i = 0; i < acc.length; i++) {\n" +
+                        "  acc[i].addEventListener(\"click\", function() {\n" +
+                        "    this.classList.toggle(\"active\");\n" +
+                        "    var panel = this.nextElementSibling;\n" +
+                        "    if (panel.style.maxHeight) {\n" +
+                        "      panel.style.maxHeight = null;\n" +
+                        "    } else {\n" +
+                        "      panel.style.maxHeight = panel.scrollHeight + \"px\";\n" +
+                        "    } \n" +
+                        "  });\n" +
+                        "}\n" +
+                        "</script>");
                 PreparedStatement st = con.prepareStatement("select now()");
                 ResultSet rs = st.executeQuery();
                 if (rs.next()) {
