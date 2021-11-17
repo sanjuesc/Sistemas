@@ -21,7 +21,7 @@
 
     <servlet-mapping>
         <servlet-name>Dump</servlet-name>
-        <url-pattern>/Dump</url-pattern>
+        <url-pattern>/dump</url-pattern>
     </servlet-mapping>
 
 </web-app>
