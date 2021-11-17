@@ -178,7 +178,7 @@ Boolean done = false;
                         "\n" +
                         "<script type=\"text/javascript\">\n" +
                         "    document.getElementById(\"myButton\").onclick = function () {\n" +
-                        "        location.href = \"/dump\";\n" +
+                        "        location.href = \"/Prueba-1.0-SNAPSHOT/dump\";\n" +
                         "    };\n" +
                         "</script>");
             } catch (ClassNotFoundException | SQLException e) {

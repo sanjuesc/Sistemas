@@ -14,4 +14,14 @@
         <url-pattern>/MyServlet</url-pattern>
     </servlet-mapping>
 
+    <servlet>
+        <servlet-name>Dump</servlet-name>
+        <servlet-class>com.example.Prueba.Dump</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>Dump</servlet-name>
+        <url-pattern>/Dump</url-pattern>
+    </servlet-mapping>
+
 </web-app>
