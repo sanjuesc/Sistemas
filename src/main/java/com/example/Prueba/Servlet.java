@@ -176,7 +176,12 @@ Boolean done = false;
 
                 writer.println("<script>function getText() {\n" +
                         "    var str = document.getElementById(\"txtArea\");\n" +
-                        "    alert(str.value + \" i did it\");\n" +
+                        " var xhr = new XMLHttpRequest();\n" +
+                        "xhr.open(\"POST\",?, true);\n" +
+                        "xhr.setRequestHeader('Content-Type', 'application/json');\n" +
+                        "xhr.send(JSON.stringify({\n" +
+                        "    value: str.value\n" +
+                        "}));" +
                         "}</script>");
                 writer.println("<textarea rows=\"5\" cols=\"100\" id=\"txtArea\"></textarea><br>\n" +
                         "<input type=\"button\" value=\"Ejecutar\" onclick=\"getText()\" />");
