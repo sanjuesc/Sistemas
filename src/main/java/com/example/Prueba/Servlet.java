@@ -115,10 +115,7 @@ Boolean done = false;
                     "  background-color: #04AA6D;\n" +
                     "  color: white;\n" +
                     "}\n" +
-                    "textarea {\n" +
-                    "  box-sizing: border-box;\n" +
-                    "  resize: none;\n" +
-                    "}</style>");
+                    "</style>");
             writer.println("<title>MyServlet.java:doGet(): Servlet code!</title>");
             writer.println("</head>");
             writer.println("<body>");
