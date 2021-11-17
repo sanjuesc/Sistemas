@@ -174,27 +174,13 @@ Boolean done = false;
                         "}\n" +
                         "</script>");
 
-
-
-                writer.println("<script>function proceed () {\n" +
-                        "    var form = document.createElement('form');\n" +
-                        "    form.setAttribute('method', 'post');\n" +
-                        "    form.setAttribute('action', 'http://google.com');\n" +
-                        "    form.style.display = 'hidden';\n" +
-                        "    document.body.appendChild(document.getElementById(\"txtArea\").value)\n" +
-                        "    form.submit();\n" +
-                        "}</script>");
-                writer.println("<textarea rows=\"5\" cols=\"100\" id=\"txtArea\"></textarea><br>\n" +
-                        "<button type=\"button\" onclick=\"proceed();\">Ejecutar</button> \n");
-                PreparedStatement st = con.prepareStatement("select now()");
-                ResultSet rs = st.executeQuery();
-                if (rs.next()) {
-                    Date fecha = rs.getDate("now()");
-                    writer.println("<h1>" + fecha + "</h1>");
-                    writer.println("Fecha obtenida de la base de datos con el usuario " + System.getenv("JDBC_USER"));
-                } else {
-                    writer.println("La conexion y tal bien pero no habia nada en el rs bro");
-                }
+                writer.println("<button id=\"myButton\" class=\"float-left submit-button\" >Hacer dump</button>\n" +
+                        "\n" +
+                        "<script type=\"text/javascript\">\n" +
+                        "    document.getElementById(\"myButton\").onclick = function () {\n" +
+                        "        location.href = \"/dump\";\n" +
+                        "    };\n" +
+                        "</script>");
             } catch (ClassNotFoundException | SQLException e) {
                 e.printStackTrace();
                 writer.println(e.getMessage());
