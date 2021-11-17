@@ -174,17 +174,12 @@ Boolean done = false;
                         "}\n" +
                         "</script>");
 
-                writer.println("<script>const tx = document.getElementsByTagName(\"textarea\");\n" +
-                        "for (let i = 0; i < tx.length; i++) {\n" +
-                        "  tx[i].setAttribute(\"style\", \"height:\" + (tx[i].scrollHeight) + \"px;overflow-y:hidden;\");\n" +
-                        "  tx[i].addEventListener(\"input\", OnInput, false);\n" +
-                        "}\n" +
-                        "\n" +
-                        "function OnInput() {\n" +
-                        "  this.style.height = \"auto\";\n" +
-                        "  this.style.height = (this.scrollHeight) + \"px\";\n" +
+                writer.println("<script>function getText() {\n" +
+                        "    var str = document.getElementById(\"txtArea\");\n" +
+                        "    alert(str.value + \" i did it\");\n" +
                         "}</script>");
-                writer.println("<textarea placeholder=\"Type, paste, cut text here...\"></textarea>");
+                writer.println("<textarea rows=\"5\" cols=\"100\" id=\"txtArea\"></textarea><br>\n" +
+                        "<input type=\"button\" value=\"Ejecutar\" onclick=\"getText()\" />");
                 PreparedStatement st = con.prepareStatement("select now()");
                 ResultSet rs = st.executeQuery();
                 if (rs.next()) {
