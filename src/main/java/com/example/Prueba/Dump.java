@@ -22,6 +22,7 @@ public class Dump extends HttpServlet {
                     "  <meta http-equiv=\"refresh\" content=\"5; URL=/Prueba-1.0-SNAPSHOT/MyServlet\" />\n" +
                     "</head>\n" +
                     "<body>\n");
+
             //https://stackoverflow.com/questions/5711084/java-runtime-getruntime-getting-output-from-executing-a-command-line-program
                     Runtime.getRuntime().exec("mysqldump -h db -u root -ppassword SISTEMAS > /usr/local/tomcat/misArchivos/dump.sql"); //no lo he probado con la linea esa, en teoria ahora funciona
                     writer.println("  <p>If you are not redirected in five seconds, <a href=\"/Prueba-1.0-SNAPSHOT/MyServlet\">click here</a>.</p>\n" +
