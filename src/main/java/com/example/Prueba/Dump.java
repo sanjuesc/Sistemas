@@ -25,7 +25,7 @@ public class Dump extends HttpServlet {
                     "<body>\n");
             System.out.println("vamos a hacer el dump");
             //https://stackoverflow.com/questions/5711084/java-runtime-getruntime-getting-output-from-executing-a-command-line-program
-            Process process =Runtime.getRuntime().exec("mysqldump  --column-statistics=0 -h db -u root -ppassword SISTEMAS > /usr/local/tomcat/misArchivos/dump.sql"); //no lo he probado con la linea esa, en teoria ahora funciona
+            Process process =Runtime.getRuntime().exec(new String[] {"sh", "-c", "mysqldump  --column-statistics=0 -h db -u root -ppassword SISTEMAS > /usr/local/tomcat/misArchivos/dump.sql"}); //no lo he probado con la linea esa, en teoria ahora funciona
             InputStream is = process.getInputStream();
             InputStreamReader isr = new InputStreamReader(is);
             BufferedReader br = new BufferedReader(isr);
