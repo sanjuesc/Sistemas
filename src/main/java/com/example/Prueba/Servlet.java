@@ -186,7 +186,6 @@ Boolean done = false;
                 writer.println(e.getMessage());
             }
 
-            writer.println("<h1>This is a simple java servlet.</h1>");
             writer.println("</body>");
             writer.println("</html>");
     }
